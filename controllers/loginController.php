@@ -13,10 +13,20 @@ class LoginController
     }
     public static function crear(Router $router)
     {
+        $usuario = null;
+        $alertas = [];
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
             $usuario = new Usuario($_POST);
+            $alertas = $usuario->validarNuevaCuenta();
+            if(!empty($alertas)){
+                
+            }
         }
-        $router->render('auth/crear-cuenta');
+
+        $router->render('auth/crear-cuenta',[
+            'usuario' => $usuario,
+            'alertas' => $alertas
+        ]);
     }
     public static function logout()
     {

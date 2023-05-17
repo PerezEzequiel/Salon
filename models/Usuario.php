@@ -31,6 +31,27 @@ class Usuario extends ActiveRecord{
         $this->password = $args['password'] ?? '';
     }
 
+    //Mensajes de validacion
+
+    public function validarNuevaCuenta(){
+        if($this->nombre == ''){
+            self::$alertas['error'][]="El nombre es obligatorio";
+        }
+        if($this->apellido == ''){
+            self::$alertas['error'][]="El apellido es obligatorio";
+        }
+        if($this->email == ''){
+            self::$alertas['error'][]="El Email cliente es obligatorio";
+        }
+        if($this->password == ''){
+            self::$alertas['error'][]="El password cliente es obligatorio";
+        }
+        if(strlen($this->password)<6){
+            self::$alertas['error'][]="El password debe tener como min 6 letras";
+        }
+
+        return self::$alertas;
+    }
 
 
 }
