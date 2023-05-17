@@ -1,0 +1,18 @@
+{
+    "name": "eze/app-salon_php_mvc_js_sass",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Mvc\\" : "./",
+            "Controllers\\": "./controllers",
+            "Model\\": "./models"
+        }
+    },
+    "authors": [
+        {
+            "name": "Eze",
+            "email": "ezequiel_agustin12@hotmail.com"
+        }
+    ],
+    "require": {}
+}

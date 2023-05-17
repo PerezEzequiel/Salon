@@ -1,8 +1,10 @@
 <?php
 namespace Model;
+
 class ActiveRecord {
 
     // Base DE DATOS
+    protected int $id;
     protected static $db;
     protected static $tabla = '';
     protected static $columnasDB = [];
