@@ -2,8 +2,10 @@
 
 namespace Controllers;
 
+use Classes\Email;
 use Model\Usuario;
 use Mvc\Router;
+use PHPMailer\PHPMailer\PHPMailer;
 
 class LoginController
 {
@@ -18,8 +20,22 @@ class LoginController
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
             $usuario = new Usuario($_POST);
             $alertas = $usuario->validarNuevaCuenta();
-            if(!empty($alertas)){
-                
+            if(empty($alertas)){
+                $resultado = $usuario->existeUsuario();
+                if($resultado->num_rows){
+                    $usuario = Usuario::getAlertas();
+                }else{
+                    $usuario->hashPassword();
+
+                    //Generar token
+
+                    $usuario->crearToken();
+
+                    //Enviar email
+                    $email = new Email($usuario->nombre,$usuario->email,$usuario->token);
+                    debuguear($email);
+                    //debuguear($usuario);
+                }
             }
         }
 
